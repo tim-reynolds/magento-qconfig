@@ -16,7 +16,7 @@
 Magento Quick Config Module
 ===========================
 
-I created this module to make working in the System -> Configuration area of the Magento Admin easier for by clients. With qsearch you get a text box that will search the labels and values of fields for any that match your input. Areas that don't match will be shaded out, allowing you to quickly and accurately navigate the configuration area. Simple, but effective.
+I created this module to make working in the System -> Configuration area of the Magento Admin easier for my clients. With qsearch you get a text box that will search the labels and values of fields for any that match your input. Areas that don't match will be shaded out, allowing you to quickly and accurately navigate the configuration area. Simple, but effective.
 
 ![Screen Shot of QConfig](https://raw.github.com/tim-reynolds/magento-qconfig/master/screenshot.png)
 
