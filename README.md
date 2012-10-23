@@ -20,6 +20,8 @@ I created this module to make working in the System -> Configuration area of the
 
 ![Screen Shot of QConfig](https://raw.github.com/tim-reynolds/magento-qconfig/master/screenshot.png)
 
+[Youtube Video showing how it works!](http://www.youtube.com/watch?v=t683rxYvEYg)
+
 Installation
 ------------
 
@@ -27,7 +29,15 @@ Clone the repository down to your computer. Copy the contents of the src/ direct
 
 This has been tested in Community 1.7 and Enterprise 1.12. If you have any issues please reach out, though as stated in the license this comes with no warranty. Please test in development before pushing to production!
 
+TODO
+----
 
+There is no support yet for single/multi-select inputs that have a source model. I have worked on a few attempts at this, however I don't yet have a solution I am comfortable with. If you search for "enabled" you won't find much, as the actual value is "1" in the data. Additionally, searches for the Country/Region/Locale text names won't work, but if you search for the short-code it will (en_us vs United States).
+
+Shameless Plug
+--------------
+
+I hope you enjoy this module. I have a few other modules I want to give back to the community. If you enjoy this, and need any help on a commercial project please don't hesitate to reach out. I can be contacted at Reynolds.TimJ@gmail.com or on Twitter @razialx.
 
 Motivation and Thanks
 ---------------------
