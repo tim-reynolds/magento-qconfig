@@ -2,7 +2,7 @@
 <config>
     <modules>
         <Treynolds_Qconfig>
-            <codePool>local</codePool>
+            <codePool>community</codePool>
             <active>true</active>
         </Treynolds_Qconfig>
     </modules>
