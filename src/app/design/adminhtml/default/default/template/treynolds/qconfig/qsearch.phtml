@@ -1,0 +1,40 @@
+<?php
+$_qsearch = $this->getRequest()->getParam('qsearch');
+$_website = $this->getRequest()->getParam('website');
+$_store = $this->getRequest()->getParam('store');
+$_section = $this->getRequest()->getParam('section');
+?>
+<label for="treynolds_qconfig_box" >
+        <?php echo $this->__('Quick Search'); ?>
+</label>
+<input type="text" onkeyup="qconfig_onkeyup(this);" value="<?php echo $this->escapeHtml($this->getRequest()->getParam('qsearch')); ?>" id="treynolds_qconfig_box" class="treynolds_qconfig_box">
+
+<script type="text/javascript">
+    var qconfig;
+    function qconfig_onkeyup(target){
+        qconfig.onkeyup(target);
+    }
+    document.observe('dom:loaded',
+            function(){
+                console.log('loaded');
+                qconfig = new Qconfig(
+                        '<?php echo $this->escapeHtml($this->getUrl('adminhtml/qconfig/search')); ?>',
+                        '<?php echo $this->escapeHtml($_website); ?>',
+                        '<?php echo $this->escapeHtml($_store); ?>',
+                        '<?php echo $this->escapeHtml($_section); ?>'
+                );
+                console.log(qconfig);
+
+                $$('#system_config_tabs dd a').each(function(link){
+                    $(link).observe('click', function(event){
+                        window.location = link.readAttribute('href').replace(/(\?.*$)/,'')+'?qsearch='+$('treynolds_qconfig_box').getValue();
+                        Event.stop(event);
+                    });
+
+                });
+                <?php if(Mage::app()->getRequest()->getParam('qsearch')): ?>
+                qconfig.handle_success(<?php echo Mage::helper('core')->jsonEncode(Mage::helper('qconfig')->getQuickSearchResults($_qsearch, $_section, $_website, $_store));?>, null, null);
+                <?php endif; ?>
+            }
+    );
+</script>

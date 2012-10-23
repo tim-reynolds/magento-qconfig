@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Treynolds_Qconfig>
+            <codePool>local</codePool>
+            <active>true</active>
+        </Treynolds_Qconfig>
+    </modules>
+</config>

@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Qconfig Javascript Unit Tests</title>
+    <link rel="stylesheet" href="qunit-1.10.0.css">
+</head>
+<body>
+<!--This div contains the DOM needed to run the tests. -->
+<div id="test-dom" style="display:none;">
+    <div class="config-boxes">
+        <!--
+        There are two input boxes because JS in the admin clones the 'save' button
+        area to display on an overlay as the user scrolls the page down.
+        -->
+        <label for="treynolds_qconfig_box">Label 1</label>
+        <input id="treynolds_qconfig_box" class="treynolds_qconfig_box" type="text">
+        <label for="treynolds_qconfig_box_2">Label 2</label>
+        <input id="treynolds_qconfig_box_2" class="treynolds_qconfig_box" type="text">
+    </div>
+    <ul id="system_config_tabs" class="tabs config-tabs">
+    <li>
+        <dl>
+            <dt class="label" style="">General</dt>
+            <dd>
+                <a href="http://dev.community.com/index.php/admin/system_config/edit/section/general/key/46fe756fd3454b28103a9613bd711de8/" class=" ">
+                    <span class="active">
+                        General                    </span>
+                </a>
+            </dd>
+            <dd class="">
+                <a href="http://dev.community.com/index.php/admin/system_config/edit/section/web/key/46fe756fd3454b28103a9613bd711de8/" class=" active ">
+                    <span class="active">
+                        Web                    </span>
+                </a>
+            </dd>
+            <dd>
+                <a href="http://dev.community.com/index.php/admin/system_config/edit/section/design/key/46fe756fd3454b28103a9613bd711de8/" class=" ">
+                    <span class="active">
+                        Design                    </span>
+                </a>
+            </dd>
+            <dd>
+                <a href="http://dev.community.com/index.php/admin/system_config/edit/section/currency/key/46fe756fd3454b28103a9613bd711de8/" class=" ">
+                    <span class="active">
+                        Currency Setup                    </span>
+                </a>
+            </dd>
+            <dd>
+                <a href="http://dev.community.com/index.php/admin/system_config/edit/section/trans_email/key/46fe756fd3454b28103a9613bd711de8/" class="separator-top ">
+                    <span class="active">
+                        Store Email Addresses                    </span>
+                </a>
+            </dd>
+            <dd>
+                <a href="http://dev.community.com/index.php/admin/system_config/edit/section/contacts/key/46fe756fd3454b28103a9613bd711de8/" class=" ">
+                    <span class="active">
+                        Contacts                    </span>
+                </a>
+            </dd>
+            <dd>
+                <a href="http://dev.community.com/index.php/admin/system_config/edit/section/reports/key/46fe756fd3454b28103a9613bd711de8/" class=" ">
+                    <span class="active">
+                        Reports                    </span>
+                </a>
+            </dd>
+            <dd class="">
+                <a href="http://dev.community.com/index.php/admin/system_config/edit/section/cms/key/46fe756fd3454b28103a9613bd711de8/" class=" last">
+                    <span class="active">
+                        Content Management                    </span>
+                </a>
+            </dd>
+        </dl>
+    </li>
+    <li>
+        <dl>
+            <dt class="label" style="">Catalog</dt>
+            <dd class="">
+                <a href="http://dev.community.com/index.php/admin/system_config/edit/section/catalog/key/46fe756fd3454b28103a9613bd711de8/" class="separator-top ">
+                    <span>
+                        Catalog                    </span>
+                </a>
+            </dd>
+            <dd class="">
+                <a href="http://dev.community.com/index.php/admin/system_config/edit/section/cataloginventory/key/46fe756fd3454b28103a9613bd711de8/" class=" ">
+                    <span>
+                        Inventory                    </span>
+                </a>
+            </dd>
+            <dd>
+                <a href="http://dev.community.com/index.php/admin/system_config/edit/section/sitemap/key/46fe756fd3454b28103a9613bd711de8/" class=" ">
+                    <span>
+                        Google Sitemap                    </span>
+                </a>
+            </dd>
+            <dd>
+                <a href="http://dev.community.com/index.php/admin/system_config/edit/section/rss/key/46fe756fd3454b28103a9613bd711de8/" class=" ">
+                    <span>
+                        RSS Feeds                    </span>
+                </a>
+            </dd>
+            <dd>
+                <a href="http://dev.community.com/index.php/admin/system_config/edit/section/sendfriend/key/46fe756fd3454b28103a9613bd711de8/" class=" last">
+                    <span>
+                        Email to a Friend                    </span>
+                </a>
+            </dd>
+        </dl>
+    </li>
+    <li>
+        <dl>
+            <dt class="label" style="">Customers</dt>
+            <dd>
+                <a href="http://dev.community.com/index.php/admin/system_config/edit/section/newsletter/key/46fe756fd3454b28103a9613bd711de8/" class=" ">
+                    <span>
+                        Newsletter                    </span>
+                </a>
+            </dd>
+            <dd>
+                <a href="http://dev.community.com/index.php/admin/system_config/edit/section/customer/key/46fe756fd3454b28103a9613bd711de8/" class="separator-top ">
+                    <span>
+                        Customer Configuration                    </span>
+                </a>
+            </dd>
+            <dd>
+                <a href="http://dev.community.com/index.php/admin/system_config/edit/section/wishlist/key/46fe756fd3454b28103a9613bd711de8/" class=" ">
+                    <span>
+                        Wishlist                    </span>
+                </a>
+            </dd>
+            <dd>
+                <a href="http://dev.community.com/index.php/admin/system_config/edit/section/promo/key/46fe756fd3454b28103a9613bd711de8/" class="separator-top ">
+                    <span>
+                        Promotions                    </span>
+                </a>
+            </dd>
+            <dd>
+                <a href="http://dev.community.com/index.php/admin/system_config/edit/section/persistent/key/46fe756fd3454b28103a9613bd711de8/" class="separator-top last">
+                    <span>
+                        Persistent Shopping Cart                    </span>
+                </a>
+            </dd>
+        </dl>
+    </li>
+    <li>
+        <dl>
+            <dt class="label" style="">Sales</dt>
+            <dd>
+                <a href="http://dev.community.com/index.php/admin/system_config/edit/section/sales/key/46fe756fd3454b28103a9613bd711de8/" class="separator-top ">
+                    <span>
+                        Sales                    </span>
+                </a>
+            </dd>
+            <dd>
+                <a href="http://dev.community.com/index.php/admin/system_config/edit/section/sales_email/key/46fe756fd3454b28103a9613bd711de8/" class=" ">
+                    <span>
+                        Sales Emails                    </span>
+                </a>
+            </dd>
+            <dd>
+                <a href="http://dev.community.com/index.php/admin/system_config/edit/section/sales_pdf/key/46fe756fd3454b28103a9613bd711de8/" class=" ">
+                    <span>
+                        PDF Print-outs                    </span>
+                </a>
+            </dd>
+            <dd>
+                <a href="http://dev.community.com/index.php/admin/system_config/edit/section/tax/key/46fe756fd3454b28103a9613bd711de8/" class="separator-top ">
+                    <span>
+                        Tax                    </span>
+                </a>
+            </dd>
+            <dd>
+                <a href="http://dev.community.com/index.php/admin/system_config/edit/section/checkout/key/46fe756fd3454b28103a9613bd711de8/" class=" ">
+                    <span>
+                        Checkout                    </span>
+                </a>
+            </dd>
+            <dd>
+                <a href="http://dev.community.com/index.php/admin/system_config/edit/section/shipping/key/46fe756fd3454b28103a9613bd711de8/" class=" ">
+                    <span>
+                        Shipping Settings                    </span>
+                </a>
+            </dd>
+            <dd class="">
+                <a href="http://dev.community.com/index.php/admin/system_config/edit/section/carriers/key/46fe756fd3454b28103a9613bd711de8/" class=" ">
+                    <span>
+                        Shipping Methods                    </span>
+                </a>
+            </dd>
+            <dd class="">
+                <a href="http://dev.community.com/index.php/admin/system_config/edit/section/google/key/46fe756fd3454b28103a9613bd711de8/" class=" ">
+                    <span>
+                        Google API                    </span>
+                </a>
+            </dd>
+            <dd class="">
+                <a href="http://dev.community.com/index.php/admin/system_config/edit/section/payment/key/46fe756fd3454b28103a9613bd711de8/" class=" ">
+                    <span>
+                        Payment Methods                    </span>
+                </a>
+            </dd>
+            <dd class="">
+                <a href="http://dev.community.com/index.php/admin/system_config/edit/section/payment_services/key/46fe756fd3454b28103a9613bd711de8/" class=" ">
+                    <span>
+                        Payment Services                    </span>
+                </a>
+            </dd>
+            <dd>
+                <a href="http://dev.community.com/index.php/admin/system_config/edit/section/moneybookers/key/46fe756fd3454b28103a9613bd711de8/" class=" last">
+                    <span>
+                        Moneybookers                    </span>
+                </a>
+            </dd>
+        </dl>
+    </li>
+    <li>
+        <dl>
+            <dt class="label" style="">Services</dt>
+            <dd>
+                <a href="http://dev.community.com/index.php/admin/system_config/edit/section/api/key/46fe756fd3454b28103a9613bd711de8/" class=" ">
+                    <span>
+                        Magento Core API                    </span>
+                </a>
+            </dd>
+            <dd>
+                <a href="http://dev.community.com/index.php/admin/system_config/edit/section/oauth/key/46fe756fd3454b28103a9613bd711de8/" class=" last">
+                    <span>
+                        OAuth                    </span>
+                </a>
+            </dd>
+        </dl>
+    </li>
+    <li>
+        <dl>
+            <dt class="label" style="">Advanced</dt>
+            <dd class="">
+                <a href="http://dev.community.com/index.php/admin/system_config/edit/section/admin/key/46fe756fd3454b28103a9613bd711de8/" class=" ">
+                    <span>
+                        Admin                    </span>
+                </a>
+            </dd>
+            <dd>
+                <a href="http://dev.community.com/index.php/admin/system_config/edit/section/system/key/46fe756fd3454b28103a9613bd711de8/" class="separator-top ">
+                    <span>
+                        System                    </span>
+                </a>
+            </dd>
+            <dd>
+                <a href="http://dev.community.com/index.php/admin/system_config/edit/section/advanced/key/46fe756fd3454b28103a9613bd711de8/" class=" ">
+                    <span>
+                        Advanced                    </span>
+                </a>
+            </dd>
+            <dd>
+                <a href="http://dev.community.com/index.php/admin/system_config/edit/section/dev/key/46fe756fd3454b28103a9613bd711de8/" class=" last">
+                    <span>
+                        Developer                    </span>
+                </a>
+            </dd>
+        </dl>
+    </li>
+    </ul>
+    <div class="entry-edit">
+        <div class="section-config"><div class="entry-edit-head collapseable"><a id="web_url-head" href="#"  class="">Url Options</a></div><input id="web_url-state" name="config_state[web_url]" type="hidden" value="0"><fieldset class="config collapseable" id="web_url" style="display: none; "><legend>Url Options</legend><table  class="form-list"><colgroup class="label"></colgroup><colgroup class="value"></colgroup><colgroup class="scope-label"></colgroup><colgroup class=""></colgroup><tbody><tr id="row_web_url_use_store" class=""><td class="label"><label for="web_url_use_store"> Add Store Code to Urls</label></td><td class="value"><select id="web_url_use_store" name="groups[url][fields][use_store][value]" class=" select">
+            <option value="1">Yes</option>
+            <option value="0" selected="selected">No</option>
+        </select>
+            <p class="note"><span><strong style="color:red">Warning!</strong> When using Store Code in URLs, in some cases system may not work properly if URLs without Store Codes are specified in the third party services (e.g. PayPal etc.).</span></p></td><td class="scope-label">[GLOBAL]</td><td class=""></td></tr><tr id="row_web_url_redirect_to_base" class=""><td class="label"><label for="web_url_redirect_to_base"> Auto-redirect to Base URL</label></td><td class="value"><select id="web_url_redirect_to_base" name="groups[url][fields][redirect_to_base][value]" class=" select">
+            <option value="0">No</option>
+            <option value="1" selected="selected">Yes (302 Found)</option>
+            <option value="301">Yes (301 Moved Permanently)</option>
+        </select>
+            <p class="note"><span>I.e. redirect from http://example.com/store/ to http://www.example.com/store/</span></p></td><td class="scope-label">[GLOBAL]</td><td class=""></td></tr></tbody></table></fieldset></div><div class="section-config"><div class="entry-edit-head collapseable"><a id="web_seo-head" href="#"  class="">Search Engines Optimization</a></div><input id="web_seo-state" name="config_state[web_seo]" type="hidden" value="0"><fieldset class="config collapseable" id="web_seo" style="display: none; "><legend>Search Engines Optimization</legend><table class="form-list"><colgroup class="label"></colgroup><colgroup class="value"></colgroup><colgroup class="scope-label"></colgroup><colgroup class=""></colgroup><tbody><tr id="row_web_seo_use_rewrites"><td class="label"><label for="web_seo_use_rewrites"> Use Web Server Rewrites</label></td><td class="value"><select id="web_seo_use_rewrites" name="groups[seo][fields][use_rewrites][value]" class=" select">
+        <option value="1" selected="selected">Yes</option>
+        <option value="0">No</option>
+    </select>
+    </td><td class="scope-label">[STORE VIEW]</td><td class=""></td></tr></tbody></table></fieldset></div><div class="section-config"><div class="entry-edit-head collapseable"><a id="web_unsecure-head" href="#"  class="">Unsecure</a></div><input id="web_unsecure-state" name="config_state[web_unsecure]" type="hidden" value="0"><fieldset class="config collapseable" id="web_unsecure" style="display: none; "><legend>Unsecure</legend><table class="form-list"><colgroup class="label"></colgroup><colgroup class="value"></colgroup><colgroup class="scope-label"></colgroup><colgroup class=""></colgroup><tbody><tr id="row_web_unsecure_base_url" class=""><td class="label"><label for="web_unsecure_base_url"> Base URL</label></td><td class="value"><input id="web_unsecure_base_url" name="groups[unsecure][fields][base_url][value]" value="http://dev.community.com/" class=" input-text" type="text">
+    </td><td class="scope-label">[STORE VIEW]</td><td class=""></td></tr><tr id="row_web_unsecure_base_link_url" class=""><td class="label"><label for="web_unsecure_base_link_url"> Base Link URL</label></td><td class="value"><input id="web_unsecure_base_link_url" name="groups[unsecure][fields][base_link_url][value]" value="{{unsecure_base_url}}" class=" input-text" type="text">
+    </td><td class="scope-label">[STORE VIEW]</td><td class=""></td></tr><tr id="row_web_unsecure_base_skin_url" class=""><td class="label"><label for="web_unsecure_base_skin_url"> Base Skin URL</label></td><td class="value"><input id="web_unsecure_base_skin_url" name="groups[unsecure][fields][base_skin_url][value]" value="{{unsecure_base_url}}skin/" class=" input-text" type="text">
+    </td><td class="scope-label">[STORE VIEW]</td><td class=""></td></tr><tr id="row_web_unsecure_base_media_url" class=""><td class="label"><label for="web_unsecure_base_media_url"> Base Media URL</label></td><td class="value"><input id="web_unsecure_base_media_url" name="groups[unsecure][fields][base_media_url][value]" value="{{unsecure_base_url}}media/" class=" input-text" type="text">
+    </td><td class="scope-label">[STORE VIEW]</td><td class=""></td></tr><tr id="row_web_unsecure_base_js_url" class=""><td class="label"><label for="web_unsecure_base_js_url"> Base JavaScript URL</label></td><td class="value"><input id="web_unsecure_base_js_url" name="groups[unsecure][fields][base_js_url][value]" value="{{unsecure_base_url}}js/" class=" input-text" type="text">
+        <p class="note"><span><strong style="color:red">Warning!</strong> When using CDN, in some cases JavaScript may not run properly if CDN is not in your subdomain</span></p></td><td class="scope-label">[STORE VIEW]</td><td class=""></td></tr></tbody></table></fieldset></div><div class="section-config"><div class="entry-edit-head collapseable"><a id="web_secure-head" href="#"  class="">Secure</a></div><input id="web_secure-state" name="config_state[web_secure]" type="hidden" value="0"><fieldset class="config collapseable" id="web_secure" style="display: none; "><legend>Secure</legend><table  class="form-list"><colgroup class="label"></colgroup><colgroup class="value"></colgroup><colgroup class="scope-label"></colgroup><colgroup class=""></colgroup><tbody><tr id="row_web_secure_base_url" class=""><td class="label"><label for="web_secure_base_url"> Base URL</label></td><td class="value"><input id="web_secure_base_url" name="groups[secure][fields][base_url][value]" value="http://dev.community.com/" class=" input-text" type="text">
+        <p class="note"><span>Make sure that base URL ends with '/' (slash), e.g. http://yourdomain/magento/</span></p></td><td class="scope-label">[STORE VIEW]</td><td class=""></td></tr><tr id="row_web_secure_base_link_url" class=""><td class="label"><label for="web_secure_base_link_url"> Base Link URL</label></td><td class="value"><input id="web_secure_base_link_url" name="groups[secure][fields][base_link_url][value]" value="{{secure_base_url}}" class=" input-text" type="text">
+        <p class="note"><span>Make sure that base URL ends with '/' (slash), e.g. http://yourdomain/magento/</span></p></td><td class="scope-label">[STORE VIEW]</td><td class=""></td></tr><tr id="row_web_secure_base_skin_url" class=""><td class="label"><label for="web_secure_base_skin_url"> Base Skin URL</label></td><td class="value"><input id="web_secure_base_skin_url" name="groups[secure][fields][base_skin_url][value]" value="{{secure_base_url}}skin/" class=" input-text" type="text">
+    </td><td class="scope-label">[STORE VIEW]</td><td class=""></td></tr><tr id="row_web_secure_base_media_url" class=""><td class="label"><label for="web_secure_base_media_url"> Base Media URL</label></td><td class="value"><input id="web_secure_base_media_url" name="groups[secure][fields][base_media_url][value]" value="{{secure_base_url}}media/" class=" input-text" type="text">
+    </td><td class="scope-label">[STORE VIEW]</td><td class=""></td></tr><tr id="row_web_secure_base_js_url" class=""><td class="label"><label for="web_secure_base_js_url"> Base JavaScript URL</label></td><td class="value"><input id="web_secure_base_js_url" name="groups[secure][fields][base_js_url][value]" value="{{secure_base_url}}js/" class=" input-text" type="text">
+        <p class="note"><span><strong style="color:red">Warning!</strong> When using CDN, in some cases JavaScript may not run properly if CDN is not in your subdomain</span></p></td><td class="scope-label">[STORE VIEW]</td><td class=""></td></tr><tr id="row_web_secure_use_in_frontend" class=""><td class="label"><label for="web_secure_use_in_frontend"> Use Secure URLs in Frontend</label></td><td class="value"><select id="web_secure_use_in_frontend" name="groups[secure][fields][use_in_frontend][value]" class=" select">
+        <option value="1">Yes</option>
+        <option value="0" selected="selected">No</option>
+    </select>
+    </td><td class="scope-label">[STORE VIEW]</td><td class=""></td></tr><tr id="row_web_secure_use_in_adminhtml" class=""><td class="label"><label for="web_secure_use_in_adminhtml"> Use Secure URLs in Admin</label></td><td class="value"><select id="web_secure_use_in_adminhtml" name="groups[secure][fields][use_in_adminhtml][value]" class=" select">
+        <option value="1">Yes</option>
+        <option value="0" selected="selected">No</option>
+    </select>
+    </td><td class="scope-label">[GLOBAL]</td><td class=""></td></tr><tr id="row_web_secure_offloader_header"><td class="label"><label for="web_secure_offloader_header"> Offloader header</label></td><td class="value"><input id="web_secure_offloader_header" name="groups[secure][fields][offloader_header][value]" value="SSL_OFFLOADED" class=" input-text" type="text">
+    </td><td class="scope-label">[GLOBAL]</td><td class=""></td></tr></tbody></table></fieldset></div><div class="section-config"><div class="entry-edit-head collapseable"><a id="web_default-head" href="#"  class="">Default Pages</a></div><input id="web_default-state" name="config_state[web_default]" type="hidden" value="0"><fieldset class="config collapseable" id="web_default" style="display: none; "><legend>Default Pages</legend><table  class="form-list"><colgroup class="label"></colgroup><colgroup class="value"></colgroup><colgroup class="scope-label"></colgroup><colgroup class=""></colgroup><tbody><tr id="row_web_default_front" class=""><td class="label"><label for="web_default_front"> Default Web URL</label></td><td class="value"><input id="web_default_front" name="groups[default][fields][front][value]" value="cms" class=" input-text" type="text">
+    </td><td class="scope-label">[STORE VIEW]</td><td class=""></td></tr><tr id="row_web_default_cms_home_page"><td class="label"><label for="web_default_cms_home_page"> CMS Home Page</label></td><td class="value"><select id="web_default_cms_home_page" name="groups[default][fields][cms_home_page][value]" class=" select">
+        <option value="no-route">404 Not Found 1</option>
+        <option value="home" selected="selected">Home page</option>
+        <option value="about-magento-demo-store">About Us</option>
+        <option value="customer-service">Customer Service</option>
+        <option value="enable-cookies">Enable Cookies</option>
+        <option value="privacy-policy-cookie-restriction-mode">Privacy Policy</option>
+    </select>
+    </td><td class="scope-label">[STORE VIEW]</td><td class=""></td></tr><tr id="row_web_default_no_route" class=""><td class="label"><label for="web_default_no_route"> Default No-route URL</label></td><td class="value"><input id="web_default_no_route" name="groups[default][fields][no_route][value]" value="cms/index/noRoute" class=" input-text" type="text">
+    </td><td class="scope-label">[STORE VIEW]</td><td class=""></td></tr><tr id="row_web_default_cms_no_route"><td class="label"><label for="web_default_cms_no_route"> CMS No Route Page</label></td><td class="value"><select id="web_default_cms_no_route" name="groups[default][fields][cms_no_route][value]" class=" select">
+        <option value="no-route" selected="selected">404 Not Found 1</option>
+        <option value="home">Home page</option>
+        <option value="about-magento-demo-store">About Us</option>
+        <option value="customer-service">Customer Service</option>
+        <option value="enable-cookies">Enable Cookies</option>
+        <option value="privacy-policy-cookie-restriction-mode">Privacy Policy</option>
+    </select>
+    </td><td class="scope-label">[STORE VIEW]</td><td class=""></td></tr><tr id="row_web_default_cms_no_cookies"><td class="label"><label for="web_default_cms_no_cookies"> CMS No Cookies Page</label></td><td class="value"><select id="web_default_cms_no_cookies" name="groups[default][fields][cms_no_cookies][value]" class=" select">
+        <option value="no-route">404 Not Found 1</option>
+        <option value="home">Home page</option>
+        <option value="about-magento-demo-store">About Us</option>
+        <option value="customer-service">Customer Service</option>
+        <option value="enable-cookies" selected="selected">Enable Cookies</option>
+        <option value="privacy-policy-cookie-restriction-mode">Privacy Policy</option>
+    </select>
+    </td><td class="scope-label">[STORE VIEW]</td><td class=""></td></tr><tr id="row_web_default_show_cms_breadcrumbs"><td class="label"><label for="web_default_show_cms_breadcrumbs"> Show Breadcrumbs for CMS Pages</label></td><td class="value"><select id="web_default_show_cms_breadcrumbs" name="groups[default][fields][show_cms_breadcrumbs][value]" class=" select">
+        <option value="1" selected="selected">Yes</option>
+        <option value="0">No</option>
+    </select>
+    </td><td class="scope-label">[STORE VIEW]</td><td class=""></td></tr></tbody></table></fieldset></div><div class="section-config"><div class="entry-edit-head collapseable"><a id="web_polls-head" href="#"  class="">Polls</a></div><input id="web_polls-state" name="config_state[web_polls]" type="hidden" value="0"><fieldset class="config collapseable" id="web_polls" style="display: none; "><legend>Polls</legend><table  class="form-list"><colgroup class="label"></colgroup><colgroup class="value"></colgroup><colgroup class="scope-label"></colgroup><colgroup class=""></colgroup><tbody><tr id="row_web_polls_poll_check_by_ip"><td class="label"><label for="web_polls_poll_check_by_ip"> Disallow Voting in a Poll Multiple Times from Same IP-address</label></td><td class="value"><select id="web_polls_poll_check_by_ip" name="groups[polls][fields][poll_check_by_ip][value]" class=" select">
+        <option value="1">Yes</option>
+        <option value="0" selected="selected">No</option>
+    </select>
+    </td><td class="scope-label">[STORE VIEW]</td><td class=""></td></tr></tbody></table></fieldset></div><div class="section-config"><div class="entry-edit-head collapseable"><a id="web_cookie-head" href="#"  class="">Session Cookie Management</a></div><input id="web_cookie-state" name="config_state[web_cookie]" type="hidden" value="0"><fieldset class="config collapseable" id="web_cookie" style="display: none; "><legend>Session Cookie Management</legend><table  class="form-list"><colgroup class="label"></colgroup><colgroup class="value"></colgroup><colgroup class="scope-label"></colgroup><colgroup class=""></colgroup><tbody><tr id="row_web_cookie_cookie_lifetime"><td class="label"><label for="web_cookie_cookie_lifetime"> Cookie Lifetime</label></td><td class="value"><input id="web_cookie_cookie_lifetime" name="groups[cookie][fields][cookie_lifetime][value]" value="3600" class=" input-text" type="text">
+    </td><td class="scope-label">[STORE VIEW]</td><td class=""></td></tr><tr id="row_web_cookie_cookie_path"><td class="label"><label for="web_cookie_cookie_path"> Cookie Path</label></td><td class="value"><input id="web_cookie_cookie_path" name="groups[cookie][fields][cookie_path][value]" value="" class=" input-text" type="text">
+    </td><td class="scope-label">[STORE VIEW]</td><td class=""></td></tr><tr id="row_web_cookie_cookie_domain"><td class="label"><label for="web_cookie_cookie_domain"> Cookie Domain</label></td><td class="value"><input id="web_cookie_cookie_domain" name="groups[cookie][fields][cookie_domain][value]" value="" class=" input-text" type="text">
+    </td><td class="scope-label">[STORE VIEW]</td><td class=""></td></tr><tr id="row_web_cookie_cookie_httponly"><td class="label"><label for="web_cookie_cookie_httponly"> Use HTTP Only</label></td><td class="value"><select id="web_cookie_cookie_httponly" name="groups[cookie][fields][cookie_httponly][value]" class=" select">
+        <option value="1" selected="selected">Yes</option>
+        <option value="0">No</option>
+    </select>
+    </td><td class="scope-label">[STORE VIEW]</td><td class=""></td></tr><tr id="row_web_cookie_cookie_restriction"><td class="label"><label for="web_cookie_cookie_restriction"> Cookie Restriction Mode</label></td><td class="value"><select id="web_cookie_cookie_restriction" name="groups[cookie][fields][cookie_restriction][value]" class=" select">
+        <option value="1">Yes</option>
+        <option value="0" selected="selected">No</option>
+    </select>
+    </td><td class="scope-label">[WEBSITE]</td><td class=""></td></tr></tbody></table></fieldset></div><div class="section-config"><div class="entry-edit-head collapseable"><a id="web_session-head" href="#"  class="">Session Validation Settings</a></div><input id="web_session-state" name="config_state[web_session]" type="hidden" value="0"><fieldset class="config collapseable" id="web_session" style="display: none; "><legend>Session Validation Settings</legend><table  class="form-list"><colgroup class="label"></colgroup><colgroup class="value"></colgroup><colgroup class="scope-label"></colgroup><colgroup class=""></colgroup><tbody><tr id="row_web_session_use_remote_addr"><td class="label"><label for="web_session_use_remote_addr"> Validate REMOTE_ADDR</label></td><td class="value"><select id="web_session_use_remote_addr" name="groups[session][fields][use_remote_addr][value]" class=" select">
+        <option value="1">Yes</option>
+        <option value="0" selected="selected">No</option>
+    </select>
+    </td><td class="scope-label">[GLOBAL]</td><td class=""></td></tr><tr id="row_web_session_use_http_via"><td class="label"><label for="web_session_use_http_via"> Validate HTTP_VIA</label></td><td class="value"><select id="web_session_use_http_via" name="groups[session][fields][use_http_via][value]" class=" select">
+        <option value="1">Yes</option>
+        <option value="0" selected="selected">No</option>
+    </select>
+    </td><td class="scope-label">[GLOBAL]</td><td class=""></td></tr><tr id="row_web_session_use_http_x_forwarded_for"><td class="label"><label for="web_session_use_http_x_forwarded_for"> Validate HTTP_X_FORWARDED_FOR</label></td><td class="value"><select id="web_session_use_http_x_forwarded_for" name="groups[session][fields][use_http_x_forwarded_for][value]" class=" select">
+        <option value="1">Yes</option>
+        <option value="0" selected="selected">No</option>
+    </select>
+    </td><td class="scope-label">[GLOBAL]</td><td class=""></td></tr><tr id="row_web_session_use_http_user_agent"><td class="label"><label for="web_session_use_http_user_agent"> Validate HTTP_USER_AGENT</label></td><td class="value"><select id="web_session_use_http_user_agent" name="groups[session][fields][use_http_user_agent][value]" class=" select">
+        <option value="1">Yes</option>
+        <option value="0" selected="selected">No</option>
+    </select>
+    </td><td class="scope-label">[GLOBAL]</td><td class=""></td></tr><tr id="row_web_session_use_frontend_sid"><td class="label"><label for="web_session_use_frontend_sid"> Use SID on Frontend</label></td><td class="value"><select id="web_session_use_frontend_sid" name="groups[session][fields][use_frontend_sid][value]" class=" select">
+        <option value="1" selected="selected">Yes</option>
+        <option value="0">No</option>
+    </select>
+        <p class="note"><span>Allows customers to stay logged in when switching between different stores.</span></p></td><td class="scope-label">[WEBSITE]</td><td class=""></td></tr></tbody></table></fieldset></div><div class="section-config"><div class="entry-edit-head collapseable"><a id="web_browser_capabilities-head" href="#"  class="">Browser Capabilities Detection</a></div><input id="web_browser_capabilities-state" name="config_state[web_browser_capabilities]" type="hidden" value="0"><fieldset class="config collapseable" id="web_browser_capabilities" style="display: none; "><legend>Browser Capabilities Detection</legend><table  class="form-list"><colgroup class="label"></colgroup><colgroup class="value"></colgroup><colgroup class="scope-label"></colgroup><colgroup class=""></colgroup><tbody><tr id="row_web_browser_capabilities_cookies"><td class="label"><label for="web_browser_capabilities_cookies"> Redirect to CMS-page if Cookies are Disabled</label></td><td class="value"><select id="web_browser_capabilities_cookies" name="groups[browser_capabilities][fields][cookies][value]" class=" select">
+        <option value="1" selected="selected">Yes</option>
+        <option value="0">No</option>
+    </select>
+    </td><td class="scope-label">[STORE VIEW]</td><td class=""></td></tr><tr id="row_web_browser_capabilities_javascript"><td class="label"><label for="web_browser_capabilities_javascript"> Show Notice if JavaScript is Disabled</label></td><td class="value"><select id="web_browser_capabilities_javascript" name="groups[browser_capabilities][fields][javascript][value]" class=" select">
+        <option value="1" selected="selected">Yes</option>
+        <option value="0">No</option>
+    </select>
+    </td><td class="scope-label">[STORE VIEW]</td><td class=""></td></tr></tbody></table></fieldset></div></div>
+</div>
+<div id="qunit"></div>
+<script type="text/javascript" src="prototype.js"></script>
+<script type="text/javascript" src="../../src/js/treynolds/qconfig.js"></script>
+<script type="text/javascript" src="qunit-1.10.0.js"></script>
+<script type="text/javascript">
+    var dom_backup = null;
+    QUnit.testStart(function(details){
+        dom_backup = $('test-dom').innerHTML;
+    });
+    QUnit.testDone(function(details){
+        $('test-dom').innerHTML = dom_backup;
+        dom_backup = null;
+    });
+    /*
+    These unit tests assume that Prototype.js is working without bugs.
+    As the Javascript is entirely reliant on Prototype, we must live with
+    this assumption as we can't be expected to test all of Prototype.
+     */
+
+    /**
+     * OnKeyup Test - This tests the functionality of the onkeyup event handler.
+     * The two things this event handler should do are:
+     * 1. Ensure the two input text boxes have the same value
+     * 2. Set a timeout for making an AJAX request. We don't want to make a request
+     * every keypress, as that is inefficient.
+     */
+    asyncTest("OnKeyup Test", function(){
+        expect(2);
+        var qconfig = new Qconfig('','','','general');
+        qconfig.timeout_delay = 0;
+        qconfig.ontimeout = function(){
+            this.timeout = null;
+            ok(true, 'Called Timeout Method');
+            equal($('treynolds_qconfig_box').getValue(), $('treynolds_qconfig_box_2').getValue(), 'Both text boxes have the same value!');
+            start();
+        };
+        var box = $('treynolds_qconfig_box');
+        box.setValue('this is my search term');
+        qconfig.onkeyup(box);
+    });
+    /**
+     * Clear Searching Test - Simple test for ensuring all classes are removed from DOM elements.
+     */
+    test("Clear Searching Test", function(){
+        expect(4);
+        $('system_config_tabs').addClassName('treynolds_searching');
+        $$('.entry_edit').each(function(){this.addClassName('treynolds_searching');});
+        var tabs = fisherYates($$('#system_config_tabs dd'));
+        //Only want to assign classes to _some_ of them.
+        var count = Math.floor(Math.max(Math.random() * tabs.length/2+1,3));
+        for(var i = 0; i < count; i++) {
+            tabs[i].addClassName('treynolds_active');
+            if(Math.random()>0.5){
+                tabs[i].addClassName('.treynolds_top');
+            }
+            if(Math.random()<0.5){
+                tabs[i].addClassName('.treynolds_bottom');
+            }
+        }
+        var groups = fisherYates($$('.entry-edit-head'));
+        count = Math.floor(Math.max(Math.random() * groups.length/2+1,3));
+        for(i = 0; i < count; i++){
+            groups[i].addClassName('treynolds_active');
+            var fields = fisherYates(groups[i].select('.form-list tr'));
+            var inner_count = Math.floor(Math.max(Math.random() * fields.length/2,1));
+            for(var j =0; j < inner_count; j++){
+                fields[j].addClassName('treynolds_active');
+            }
+
+        }
+        var qconfig = new Qconfig('','','','general');
+        qconfig.clear_searching();
+        equal($$('.treynolds_active').length, 0, "All .treynolds_active removed!");
+        equal($$('.treynolds_top').length, 0, "All .treynolds_top removed!");
+        equal($$('.treynolds_bottom').length, 0, "All .treynolds_bottom removed!");
+        equal($$('.treynolds_searching').length, 0, "All .treynolds_searching removed!");
+
+    });
+    /**
+     * Handle Success Test - This method processes the return data from an ajax call
+     * and assigns classes to DOM elements accordingly.
+     */
+    test("Handle Success Test", function(){
+        var qconfig = new Qconfig('','','','general');
+        //This is the return for the search of URL on a default 1.7.X system as of 10/22/2012
+        var data = {"nav":["section\/admin","section\/web","section\/cms","section\/catalog","section\/payment","section\/carriers","section\/google","section\/web"],"group":["web_unsecure","web_unsecure","web_unsecure","web_unsecure","web_unsecure","web_secure","web_secure","web_secure","web_secure","web_secure","web_url-head","web_url","web_url","web_unsecure","web_unsecure","web_unsecure","web_unsecure","web_unsecure","web_secure","web_secure","web_secure","web_secure","web_secure","web_secure","web_secure","web_default","web_default"],"field":["row_web_unsecure_base_web_url","row_web_unsecure_base_link_url","row_web_unsecure_base_js_url","row_web_unsecure_base_skin_url","row_web_unsecure_base_media_url","row_web_secure_base_web_url","row_web_secure_base_link_url","row_web_secure_base_js_url","row_web_secure_base_skin_url","row_web_secure_base_media_url","row_web_url_use_store","row_web_url_redirect_to_base","row_web_unsecure_base_url","row_web_unsecure_base_link_url","row_web_unsecure_base_skin_url","row_web_unsecure_base_media_url","row_web_unsecure_base_js_url","row_web_secure_base_url","row_web_secure_base_link_url","row_web_secure_base_skin_url","row_web_secure_base_media_url","row_web_secure_base_js_url","row_web_secure_use_in_frontend","row_web_secure_use_in_adminhtml","row_web_default_front","row_web_default_no_route"]};
+        qconfig.handle_success(data);
+        ['web_url-head','web_unsecure-head','web_secure-head','web_default-head'].each(function(group){
+            ok($(group).up().hasClassName('treynolds_active'),'Group ' + group + ' is active!');
+        });
+        ['row_web_url_use_store','row_web_url_redirect_to_base','row_web_unsecure_base_url','row_web_unsecure_base_link_url','row_web_unsecure_base_skin_url','row_web_unsecure_base_media_url','row_web_unsecure_base_js_url','row_web_secure_base_url','row_web_secure_base_link_url','row_web_secure_base_skin_url','row_web_secure_base_media_url','row_web_secure_base_js_url','row_web_secure_use_in_frontend','row_web_secure_use_in_adminhtml','row_web_default_front','row_web_default_no_route'].each(function(field){
+            ok($(field).hasClassName('treynolds_active'),'Field ' + field + ' is active!');
+        });
+        ['section/web','section/cms','section/catalog','section/cataloginventory','section/carriers','section/google','section/payment','section/payment_services','section/admin'].each(function(tab){
+            ok($$('a[href*="'+tab+'"]')[0].up().hasClassName('treynolds_active'),'Tab ' + tab + ' is active!');
+        });
+        ['web_seo-head','web_polls-head','web_cookie-head','web_session-head','web_browser_capabilities-head'].each(function(group){
+            ok(!$(group).up().hasClassName('treynolds_active'),'Group ' + group + ' is NOT active!');
+        });
+        ['row_web_seo_use_rewrites','row_web_secure_offloader_header','row_web_default_cms_home_page','row_web_default_cms_no_route','row_web_default_cms_no_cookies','row_web_default_show_cms_breadcrumbs','row_web_polls_poll_check_by_ip','row_web_cookie_cookie_lifetime','row_web_cookie_cookie_path','row_web_cookie_cookie_domain','row_web_cookie_cookie_httponly','row_web_cookie_cookie_restriction','row_web_session_use_remote_addr','row_web_session_use_http_via','row_web_session_use_http_x_forwarded_for','row_web_session_use_http_user_agent','row_web_session_use_frontend_sid','row_web_browser_capabilities_cookies','row_web_browser_capabilities_javascript'].each(function(field){
+            ok(!$(field).hasClassName('treynolds_active'),'Field ' + field + ' is active!');
+        });
+        ['section/general','section/design','section/currency','section/trans_email','section/contacts','section/reports','section/sitemap','section/rss','section/sendfriend','section/newsletter','section/customer','section/wishlist','section/promo','section/persistent','section/sales','section/sales_email','section/sales_pdf','section/tax','section/checkout','section/shipping','section/moneybookers','section/api','section/oauth','section/system','section/advanced','section/dev'].each(function(tab){
+            ok(!$$('a[href*="'+tab+'"]')[0].up().hasClassName('treynolds_active'),'Tab ' + tab + ' is NOT active!');
+        });
+    });
+
+    /**
+     * Good Ol' FisherYates Shuffle. This is used by tests to randomly assign classes to DOM elements.
+     * @param myArray
+     * @return {*}
+     */
+    function fisherYates ( myArray ) {
+        var i = myArray.length;
+        if ( i == 0 ) return false;
+        while ( --i ) {
+            var j = Math.floor( Math.random() * ( i + 1 ) );
+            var tempi = myArray[i];
+            myArray[i] = myArray[j];
+            myArray[j] = tempi;
+        }
+        return myArray;
+    }
+</script>
+</body>
+</html>

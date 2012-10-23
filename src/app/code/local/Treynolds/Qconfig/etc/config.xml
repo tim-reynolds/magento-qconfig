@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Treynolds_Qconfig>
+            <version>0.0.1</version>
+        </Treynolds_Qconfig>
+    </modules>
+    <global>
+        <helpers>
+            <qconfig>
+                <class>Treynolds_Qconfig_Helper</class>
+            </qconfig>
+        </helpers>
+        <blocks>
+            <qconfig>
+                <class>Treynolds_Qconfig_Block</class>
+            </qconfig>
+            <adminhtml>
+                <rewrite>
+                    <system_config_edit>Treynolds_Qconfig_Block_Adminhtml_System_Config_Edit</system_config_edit>
+                </rewrite>
+            </adminhtml>
+        </blocks>
+    </global>
+    <adminhtml>
+        <layout>
+            <updates>
+                <qconfig>
+                    <file>treynolds/qconfig.xml</file>
+                </qconfig>
+            </updates>
+        </layout>
+    </adminhtml>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Treynolds_Qconfig before="Mage_Adminhtml">Treynolds_Qconfig_Adminhtml</Treynolds_Qconfig>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+</config>

@@ -1,0 +1,35 @@
+
+    /**
+    * Open Source Initiative OSI - The MIT License (MIT):Licensing
+    *
+    * The MIT License (MIT)
+    * Copyright (c) 2009 - 2011 Pulse Storm LLC
+    *
+    * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+    *
+    * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+    *
+    * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+    */
+
+
+Magento Quick Config Module
+===========================
+
+I created this module to make working in the System -> Configuration area of the Magento Admin easier for by clients. With qsearch you get a text box that will search the labels and values of fields for any that match your input. Areas that don't match will be shaded out, allowing you to quickly and accurately navigate the configuration area. Simple, but effective.
+
+![Screen Shot of QConfig](https://raw.github.com/tim-reynolds/magento-qconfig/master/screenshot.png)
+
+Installation
+------------
+
+Clone the repository down to your computer. Copy the contents of the src/ directory into your Magento root directory. Then go into the admin and clear the config and layout caches.
+
+This has been tested in Community 1.7 and Enterprise 1.12. If you have any issues please reach out, though as stated in the license this comes with no warranty. Please test in development before pushing to production!
+
+
+
+Motivation and Thanks
+---------------------
+
+As the Magento community has been amazing to me, I decided to give this back as some small token of appreciation. I have long wanted to write this, but was always busy. The final motivation came when Alan Storm (@alanstorm, http://alanstorm.com) released an excellent module for quickly navigating the Admin menu with your keyboard. You should also buy his e-book on Magento Layouts. I also want to thank other great community members (and forgive me, I will surely forget many): @VinaiKopp @fbrnc @sherrierohde @sparcksoft @kab8609 @benmarks @markshust @monocat @arush @b_ike @colinmollenhour @alistairstead @aschroder @cloudhead @zerkella and many many more. Thanks for making this the best software community around!

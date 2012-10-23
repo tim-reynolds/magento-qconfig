@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<layout>
+    <adminhtml_system_config_index>
+        <reference name="head">
+            <action method="addCss">
+                <file>treynolds/qconfig.css</file>
+            </action>
+            <action method="addJs">
+                <file>treynolds/qconfig.js</file>
+            </action>
+        </reference>
+    </adminhtml_system_config_index>
+    <adminhtml_system_config_edit>
+        <reference name="head">
+            <action method="addCss">
+                <file>treynolds/qconfig.css</file>
+            </action>
+            <action method="addJs">
+                <file>treynolds/qconfig.js</file>
+            </action>
+        </reference>
+    </adminhtml_system_config_edit>
+</layout>
