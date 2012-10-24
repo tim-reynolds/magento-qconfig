@@ -7,7 +7,11 @@ $_section = $this->getRequest()->getParam('section');
 <label for="treynolds_qconfig_box" >
         <?php echo $this->__('Quick Search'); ?>
 </label>
-<input type="text" onkeyup="qconfig_onkeyup(event);" value="<?php echo $this->escapeHtml($this->getRequest()->getParam('qsearch')); ?>" id="treynolds_qconfig_box" class="treynolds_qconfig_box">
+<div class="treynolds_qconfig_box_wrap">
+    <input type="text" onkeyup="qconfig_onkeyup(event);" value="<?php echo $this->escapeHtml($this->getRequest()->getParam('qsearch')); ?>" id="treynolds_qconfig_box" class="treynolds_qconfig_box">
+    <div class="treynolds_qconfig_no_results"><?php echo $this->__('No Matches'); ?></div>
+</div>
+
 <a class="treynolds_qconfig_clear" href="#" onclick="qconfig_clear(); return false;">&nbsp;</a>
 <script type="text/javascript">
     var qconfig;
@@ -17,7 +21,8 @@ $_section = $this->getRequest()->getParam('section');
             qconfig_clear();
         }
         else {
-            qconfig.onkeyup(event.target);
+            var target = (event.currentTarget) ? event.currentTarget : event.srcElement ;
+            qconfig.onkeyup(target);
         }
     }
     function qconfig_clear(){
@@ -31,7 +36,6 @@ $_section = $this->getRequest()->getParam('section');
                         '<?php echo $this->escapeHtml($_store); ?>',
                         '<?php echo $this->escapeHtml($_section); ?>'
                 );
-                console.log(qconfig);
 
                 $$('#system_config_tabs dd a').each(function(link){
                     $(link).observe('click', function(event){

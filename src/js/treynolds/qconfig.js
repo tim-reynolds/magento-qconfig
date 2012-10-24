@@ -57,6 +57,11 @@ Qconfig.prototype = {
             }
         );
 
+        if(data.nav.length == 0 && data.group.length == 0 && data.field.length == 0){
+            this.handle_no_results()
+            return;
+        }
+
         for (var i = 0; i < data.nav.length; i++) {
             $$('#system_config_tabs a[href*="' + data.nav[i] + '"]').each(
                 function (elm) {
@@ -103,7 +108,17 @@ Qconfig.prototype = {
         });
         this.clear_searching();
     },
+    handle_no_results:function(){
+        $$('.treynolds_qconfig_box_wrap').each(function(noresults){
+            noresults.addClassName('no_results');
+        });
+    },
     clear_searching:function () {
+        $$('.no_results').each(
+            function (elm){
+                elm.removeClassName('no_results');
+            }
+        );
         $$('.treynolds_active').each(
             function (elm) {
                 elm.removeClassName('treynolds_active');
