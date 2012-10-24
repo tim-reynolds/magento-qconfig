@@ -92,6 +92,17 @@ Qconfig.prototype = {
             }
         });
     },
+    onescape:function(){
+        //Don't want a request coming back after we clear.
+        if(this.timeout != null){
+            clearTimeout(this.timeout);
+            this.timeout = null;
+        }
+        $$('.treynolds_qconfig_box').each(function(box){
+            box.setValue('');
+        });
+        this.clear_searching();
+    },
     clear_searching:function () {
         $$('.treynolds_active').each(
             function (elm) {
