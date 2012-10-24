@@ -1,4 +1,12 @@
+.treynolds_qconfig_clear {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
 
+    margin-left: -23px;
+    background: url(../../../default/default/images/cancel_icon.gif) center center no-repeat;
+    text-decoration: none;
+}
 #system_config_tabs.treynolds_searching dd a ,
 #system_config_tabs.treynolds_searching dd a:hover {
     background: #929292 none;

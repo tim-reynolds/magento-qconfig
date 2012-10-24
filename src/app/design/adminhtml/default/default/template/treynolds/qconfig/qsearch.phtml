@@ -7,16 +7,24 @@ $_section = $this->getRequest()->getParam('section');
 <label for="treynolds_qconfig_box" >
         <?php echo $this->__('Quick Search'); ?>
 </label>
-<input type="text" onkeyup="qconfig_onkeyup(this);" value="<?php echo $this->escapeHtml($this->getRequest()->getParam('qsearch')); ?>" id="treynolds_qconfig_box" class="treynolds_qconfig_box">
-
+<input type="text" onkeyup="qconfig_onkeyup(event);" value="<?php echo $this->escapeHtml($this->getRequest()->getParam('qsearch')); ?>" id="treynolds_qconfig_box" class="treynolds_qconfig_box">
+<a class="treynolds_qconfig_clear" href="#" onclick="qconfig_clear(); return false;">&nbsp;</a>
 <script type="text/javascript">
     var qconfig;
-    function qconfig_onkeyup(target){
-        qconfig.onkeyup(target);
+    function qconfig_onkeyup(event){
+        //27 is the key code for the ESC key.
+        if(event.which == 27 || event.keyCode == 27){
+            qconfig_clear();
+        }
+        else {
+            qconfig.onkeyup(event.target);
+        }
+    }
+    function qconfig_clear(){
+        qconfig.onescape();
     }
     document.observe('dom:loaded',
             function(){
-                console.log('loaded');
                 qconfig = new Qconfig(
                         '<?php echo $this->escapeHtml($this->getUrl('adminhtml/qconfig/search')); ?>',
                         '<?php echo $this->escapeHtml($_website); ?>',
