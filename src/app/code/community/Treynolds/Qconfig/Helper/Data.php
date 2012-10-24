@@ -46,7 +46,7 @@ class Treynolds_Qconfig_Helper_Data extends Mage_Core_Helper_Abstract {
             $path[] = $current;
             /* The count is 4 when we matched a 'group' label */
             if(count($path)==4){
-                $group_ret[] = $path[3]. '_' . $path[1] . '-head';
+                $group_ret[] = $path[3]. '_' . $path[1];
             }
             /* The count is 6 when we match a 'field' label */
             else if(count($path)==6) {

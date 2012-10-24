@@ -53,6 +53,15 @@
     transition: all 0.5s ease;
 }
 
+.treynolds_qconfig_field_count {
+    float: right;
+    text-align: center;
+    padding: 0 7px;
+    margin-right: 25px;
+    background: url(../../../default/default/images/nav1_active.gif) center center no-repeat;
+    border-radius: 8px;
+
+}
 #system_config_tabs.treynolds_searching dd a ,
 #system_config_tabs.treynolds_searching dd a:hover {
     background: #929292 none;
