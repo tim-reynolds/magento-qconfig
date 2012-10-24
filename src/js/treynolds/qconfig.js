@@ -95,6 +95,11 @@ Qconfig.prototype = {
             if (t.next() != null && t.next().hasClassName('treynolds_active')) {
                 t.addClassName('treynolds_top');
             }
+            if(t.hasClassName('entry-edit-head')){
+                var count = t.up().select('.form-list .treynolds_active').length ;
+                var span = new Element('span', {'class':'treynolds_qconfig_field_count'}).update(count + ' Field'+(count==1?' Matches':'s Match'));
+                t.select('a')[0].insert(span);
+            }
         });
     },
     onescape:function(){
@@ -129,6 +134,11 @@ Qconfig.prototype = {
         $$('.treynolds_searching').each(
             function (elm) {
                 elm.removeClassName('treynolds_searching');
+            }
+        );
+        $$('.treynolds_qconfig_field_count').each(
+            function(elm){
+                elm.remove();
             }
         );
     }
