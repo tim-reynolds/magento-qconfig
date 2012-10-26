@@ -22,6 +22,90 @@ class Treynolds_Qconfig_Helper_Data extends Mage_Core_Helper_Abstract {
         }
         return $nav_ret;
     }
+    /**
+     * @param $qsearch string
+     * @param $sections Mage_Core_Model_Config_Element
+     * @param $configRoot Varien_Simplexml_Element
+     * @param $levelClause string
+     * @return array
+     */
+    protected function devGetNavRecords($qsearch, $sections, $configRoot, $levelClause){
+        $tmp_nav_counts = array();
+        $tmp_track = array();
+        $nodes = $configRoot->xpath('*/*/*[contains(translate(text(), "ABCDEFGHIJKLMNOPQRSTUVWXYZ", "abcdefghijklmnopqrstuvwxyz"), "'. $qsearch.'")]');
+        foreach($nodes as $node){
+            $group = $node->xpath('..');
+            $section = $group[0]->xpath('..');
+            $section_name = $section[0]->getName();
+            $tmp_track[$section_name . '/' . $group[0]->getName() . '/' . $node->getName()] = 1;
+            if(isset($tmp_nav_counts[$section_name])){
+                $tmp_nav_counts[$section_name][0]++;
+            }
+            else {
+                $tmp_nav_counts[$section_name] = array(1,0);
+            }
+        }
+
+        $nodes = $sections->xpath('*/groups//label[contains(translate(text(), "ABCDEFGHIJKLMNOPQRSTUVWXYZ", "abcdefghijklmnopqrstuvwxyz"), "'.$qsearch.'") and ../'.$levelClause.'="1"]');
+
+        foreach($nodes as $node){
+            $path = array();
+            $parent = $node->xpath('.');
+            $sanity = 0;
+            while($parent!==false && count($parent)>0 && $parent[0]->getName()!='sections' && $sanity++ < 10){
+                $path[] = $parent[0]->getName();
+                $parent = $parent[0]->xpath('./..');
+            }
+            $tmp_section = false;
+            $tmp_group = false;
+            $tmp_field = false;
+
+            /* The count is 4 when we matched a 'group' label */
+            if(count($path)==4){
+
+                $tmp_section = $path[3];
+                $tmp_group = true;//$path[3]. '/' . $path[1];
+
+            }
+            /* The count is 6 when we match a 'field' label */
+            else if(count($path)==6) {
+                $tmp_section = $path[5];
+                $tmp_field = $path[5] . '/' . $path[3] . '/' . $path[1];
+            }
+
+
+            if($tmp_section!==false){
+                if($tmp_group){
+                    if(isset($tmp_nav_counts[$tmp_section])){
+                        $tmp_nav_counts[$tmp_section][1]++;
+                    }
+                    else {
+                        $tmp_nav_counts[$tmp_section]= array(0,1);
+                    }
+                }
+
+                if($tmp_field && !isset($tmp_track[$tmp_field])){
+                    $tmp_track[$tmp_field] = 1;
+                    if(isset($tmp_nav_counts[$tmp_section])){
+                        $tmp_nav_counts[$tmp_section][0]++;
+
+                    }
+                    else {
+                        $tmp_nav_counts[$tmp_section]= array(1,0);
+
+                    }
+                }
+            }
+
+        }
+        $nav_ret = array();
+        foreach($tmp_nav_counts as $section=>$counts){
+            $nav_ret[] = array('section/'.$section, $counts[0], $counts[1]);
+        }
+
+
+        return $nav_ret;
+    }
 
     /**
      * @param $qsearch string
@@ -109,14 +193,12 @@ class Treynolds_Qconfig_Helper_Data extends Mage_Core_Helper_Abstract {
         }
         $qsearch = preg_replace('/("|\[|\]|\(|\))/','',$qsearch);
         $levelClause = $this->getLevelClause($website, $store);
-        /* @var $configFields Mage_Adminhtml_Model_Config */
-        $configFields = Mage::getSingleton('adminhtml/config');
         /* @var $formBlock Mage_Adminhtml_Block_System_Config_Form */
         $formBlock = Mage::app()->getLayout()->createBlock('adminhtml/system_config_form');
         /* @var $sections Varien_Simplexml_Element */
         $configRoot = $formBlock->getConfigRoot();
         /* @var $sections Mage_Core_Model_Config_Element */
-        $sections = $configFields->getSections($current);
+        $sections = $this->getSections($current, $website, $store);
         /**
          * First, get the top-level nodes for the left-hand nav.
          */
@@ -146,6 +228,34 @@ class Treynolds_Qconfig_Helper_Data extends Mage_Core_Helper_Abstract {
         $group_ret = array_merge($by_value[0], $by_label[0]);
         $field_ret = array_merge($by_value[1], $by_label[1]);
         return array('nav'=>$nav_ret, 'group'=>$group_ret, 'field'=>$field_ret);
+    }
+
+    /**
+     * @param $current string
+     * @param $website string
+     * @param $store string
+     * @return Mage_Core_Model_Config_Element
+     */
+    protected function getSections($current, $website, $store){
+        /* @var $cache Mage_Core_Model_Cache */
+        $cache = Mage::getSingleton('core/cache');
+        $cache_id = 'treynolds_qcache_' . $website . '_' . $store;
+        /* Check the cache */
+        /* @var $sections Mage_Core_Model_Config_Element */
+        $sections = null;
+        /* @var $sections_xml string */
+        $sections_xml = $cache->load($cache_id);
+        if(!$sections_xml){
+            /* @var $configFields Mage_Adminhtml_Model_Config */
+            $configFields = Mage::getSingleton('adminhtml/config');
+            $sections = $configFields->getSections($current);
+            $cache->save($sections->asXml(), $cache_id, array(Mage_Core_Model_Config::CACHE_TAG));
+        }
+        else {
+            $sections = new Mage_Core_Model_Config_Element($sections_xml);
+        }
+
+        return $sections;
     }
 
     /**

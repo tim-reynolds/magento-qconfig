@@ -1,11 +1,24 @@
 .treynolds_qconfig_clear {
     display: inline-block;
+    position: relative;
     width: 20px;
     height: 20px;
 
     margin-left: -23px;
     background: url(../../../default/default/images/cancel_icon.gif) center center no-repeat;
     text-decoration: none;
+}
+.treynolds_qconfig_loading {
+    background: url(ajax-loader.gif) top left no-repeat;
+    display: none;
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    top: -6px;
+    left: -6px;
+}
+.treynolds_qconfig_loading.treynolds_loading {
+    display: block;
 }
 .treynolds_qconfig_box_wrap {
     display: inline-block;
@@ -62,6 +75,16 @@
     border-radius: 8px;
 
 }
+
+#system_config_tabs.treynolds_searching dd.treynolds_active span b {
+    float: right;
+    color: #fff;
+    background: url(../../../default/default/images/nav1_active.gif) center center no-repeat;
+    padding: 0 4px;
+    border-radius: 8px;
+
+}
+
 #system_config_tabs.treynolds_searching dd a ,
 #system_config_tabs.treynolds_searching dd a:hover {
     background: #929292 none;
@@ -95,7 +118,7 @@
 #system_config_tabs.treynolds_searching .treynolds_active span {
     cursor: pointer !important;
 
-    background:url(/skin/adminhtml/default/default/images/tabs_link_bg.gif) repeat-y 100% #E7EFEF !important;
+    background:url(../../../default/default/images/tabs_link_bg.gif) repeat-y 100% #E7EFEF !important;
     font-weight: bold;
     border-radius: 12px;
 }

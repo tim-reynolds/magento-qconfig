@@ -32,6 +32,11 @@ Qconfig.prototype = {
             this.clear_searching();
             return;
         }
+        $$('.treynolds_qconfig_loading').each(
+            function(elm){
+                elm.addClassName('treynolds_loading');
+            }
+        );
         new Ajax.Request(this.url, {
                 method:'get',
                 loaderArea:false,
@@ -119,6 +124,11 @@ Qconfig.prototype = {
         });
     },
     clear_searching:function () {
+        $$('.treynolds_loading').each(
+            function (elm){
+                elm.removeClassName('treynolds_loading');
+            }
+        );
         $$('.no_results').each(
             function (elm){
                 elm.removeClassName('no_results');
@@ -136,7 +146,7 @@ Qconfig.prototype = {
                 elm.removeClassName('treynolds_searching');
             }
         );
-        $$('.treynolds_qconfig_field_count').each(
+        $$('.treynolds_qconfig_field_count, b.treynolds_nav_count').each(
             function(elm){
                 elm.remove();
             }
