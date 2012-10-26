@@ -1,6 +1,6 @@
-src/app/code/local/Treynolds/Qconfig                                                   app/code/local/Treynolds/Qconfig
-src/app/design/adminhtml/default/default/layout/treynolds         app/design/adminhtml/default/default/layout/treynolds
+src/app/code/community/Treynolds/Qconfig                        app/code/community/Treynolds/Qconfig
+src/app/design/adminhtml/default/default/layout/treynolds       app/design/adminhtml/default/default/layout/treynolds
 src/app/design/adminhtml/default/default/template/treynolds     app/design/adminhtml/default/default/template/treynolds
-src/js/treynolds                                                                                           js/treynolds
-src/skin/adminhtml/base/default/treynolds                                         skin/adminhtml/base/default/treynolds
-src/app/etc/modules/*                                                                                  app/etc/modules/
+src/js/treynolds                                                js/treynolds
+src/skin/adminhtml/base/default/treynolds                       skin/adminhtml/base/default/treynolds
+src/app/etc/modules/*                                           app/etc/modules/
