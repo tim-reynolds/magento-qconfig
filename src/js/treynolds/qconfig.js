@@ -63,7 +63,7 @@ Qconfig.prototype = {
         );
 
         if(data.nav.length == 0 && data.group.length == 0 && data.field.length == 0){
-            this.handle_no_results()
+            this.handle_no_results();
             return;
         }
 
@@ -101,7 +101,7 @@ Qconfig.prototype = {
                 t.addClassName('treynolds_top');
             }
             if(t.hasClassName('entry-edit-head')){
-                var count = t.up().select('.form-list .treynolds_active').length ;
+                var count = t.next().next().select('.form-list .treynolds_active').length ;
                 var span = new Element('span', {'class':'treynolds_qconfig_field_count'}).update(count + ' Field'+(count==1?' Matches':'s Match'));
                 t.select('a')[0].insert(span);
             }

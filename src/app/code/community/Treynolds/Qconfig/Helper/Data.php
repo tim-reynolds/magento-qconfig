@@ -176,6 +176,65 @@ class Treynolds_Qconfig_Helper_Data extends Mage_Core_Helper_Abstract {
     }
 
     /**
+     * This function will load a module's system.xml file and find all fields in it. Does not
+     * actually do string searching, just finds everything defined.
+     *
+     * @param $module string
+     * @param $current string
+     * @param $levelClause string
+     * @return array
+     */
+    protected function getModuleSpecificRecords($module, $current, $levelClause) {
+
+        $module = uc_words($module);
+
+        /* @var $conf Mage_Core_Model_Config_System */
+        $conf = Mage::getModel('core/config_system');
+        $conf->load($module);
+        /* @var $sections Mage_Core_Model_Config_Element */
+
+        $sections = $conf->getNode('sections');
+        if(!$sections){
+            return array(array(),array(),array());
+        }
+        $nodes = $sections->xpath('*[.//label[../'.$levelClause.'="1"]]');
+
+
+        //$nodes = $sections->xpath($current . '/groups//label[../'.$levelClause.'="1"]');
+        $nav_ret = array();
+        $group_ret = array();
+        $field_ret = array();
+        /* @var $node Mage_Core_Model_Config_Element */
+        foreach($nodes as $node){
+            $nav_ret[] = 'section/'. $node->getName(0);
+        }
+
+        $nodes = $sections->xpath($current . '/groups//label[../'.$levelClause.'="1"]');
+        foreach($nodes as $node){
+            $path = array();
+            $parent = $node->xpath('.');
+            $sanity = 0;
+            while($parent[0]->getName()!=$current && $sanity++ < 10){
+                $path[] = $parent[0]->getName();
+                $parent = $parent[0]->xpath('./..');
+            }
+            $path[] = $current;
+            /* The count is 4 when we matched a 'group' label */
+            if(count($path)==4){
+                $group_ret[] = $path[3]. '_' . $path[1];
+            }
+            /* The count is 6 when we match a 'field' label */
+            else if(count($path)==6) {
+                $group_ret[] = $path[5]. '_' . $path[3];
+                $field_ret[] ='row_' .  $path[5] . '_' . $path[3] . '_' . $path[1];
+            }
+
+        }
+
+        return array($nav_ret, $group_ret, $field_ret);
+    }
+
+    /**
      * @param $qsearch string Query String
      * @param $current string The current section of config you are viewing
      * @param $website string The current website you are under. Can be null or empty string
@@ -188,45 +247,55 @@ class Treynolds_Qconfig_Helper_Data extends Mage_Core_Helper_Abstract {
         }
 
         $qsearch =  trim(strtolower($qsearch));
+
         if(strlen($qsearch)==0){
             return array('nav'=>array(),'group'=>array(), 'field'=>array());
         }
+
         $qsearch = preg_replace('/("|\[|\]|\(|\))/','',$qsearch);
         $levelClause = $this->getLevelClause($website, $store);
-        /* @var $formBlock Mage_Adminhtml_Block_System_Config_Form */
-        $formBlock = Mage::app()->getLayout()->createBlock('adminhtml/system_config_form');
-        /* @var $sections Varien_Simplexml_Element */
-        $configRoot = $formBlock->getConfigRoot();
-        /* @var $sections Mage_Core_Model_Config_Element */
-        $sections = $this->getSections($current, $website, $store);
-        /**
-         * First, get the top-level nodes for the left-hand nav.
-         */
-        $nav_ret = $this->getNavRecords($qsearch, $sections, $configRoot, $levelClause);
+
+        if(!preg_match('/^module:(.+)/', $qsearch, $matches)){
+            /* @var $formBlock Mage_Adminhtml_Block_System_Config_Form */
+            $formBlock = Mage::app()->getLayout()->createBlock('adminhtml/system_config_form');
+            /* @var $sections Varien_Simplexml_Element */
+            $configRoot = $formBlock->getConfigRoot();
+            /* @var $sections Mage_Core_Model_Config_Element */
+            $sections = $this->getSections($current, $website, $store);
+            /**
+             * First, get the top-level nodes for the left-hand nav.
+             */
+            $nav_ret = $this->getNavRecords($qsearch, $sections, $configRoot, $levelClause);
 
 
-        /**
-         * For finding the elements on your page we have to do things a little different
-         * We can't combine the xpath because we are grabbing the lowest level nodes
-         * and since the xml structure of the Config differs from the structure of the
-         * config display xml the parsing is slightly different.
-         * Essentially, in the config display xml there is a max depth and there are
-         * filler tags (groups, fields). In the actual config xml there aren't fillers
-         * and the depth can be more variable.
-         *
-         * This results in an array with duplicates, but that doesn't have much effect
-         * on the front-end.
-         */
-        /* Config display xml for the page you are on */
-        $by_label = $this->getGroupAndFieldRecordsByLabel($qsearch, $current, $sections, $levelClause);
-        /* Next we get the actual config xml for the page you are on */
-        $by_value = $this->getGroupAndFieldRecordsByValue($qsearch, $current, $configRoot);
+            /**
+             * For finding the elements on your page we have to do things a little different
+             * We can't combine the xpath because we are grabbing the lowest level nodes
+             * and since the xml structure of the Config differs from the structure of the
+             * config display xml the parsing is slightly different.
+             * Essentially, in the config display xml there is a max depth and there are
+             * filler tags (groups, fields). In the actual config xml there aren't fillers
+             * and the depth can be more variable.
+             *
+             * This results in an array with duplicates, but that doesn't have much effect
+             * on the front-end.
+             */
+            /* Config display xml for the page you are on */
+            $by_label = $this->getGroupAndFieldRecordsByLabel($qsearch, $current, $sections, $levelClause);
+            /* Next we get the actual config xml for the page you are on */
+            $by_value = $this->getGroupAndFieldRecordsByValue($qsearch, $current, $configRoot);
+            $group_ret = array_merge($by_value[0], $by_label[0]);
+            $field_ret = array_merge($by_value[1], $by_label[1]);
+        }
+        else {
+            list($nav_ret, $group_ret, $field_ret) = $this->getModuleSpecificRecords($matches[1], $current, $levelClause);
+
+        }
         /* Finally, we handle edge cases */
         //TODO: Figure out how to handle edge cases
 
 
-        $group_ret = array_merge($by_value[0], $by_label[0]);
-        $field_ret = array_merge($by_value[1], $by_label[1]);
+
         return array('nav'=>$nav_ret, 'group'=>$group_ret, 'field'=>$field_ret);
     }
 
