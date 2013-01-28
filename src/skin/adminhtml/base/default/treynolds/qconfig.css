@@ -66,6 +66,9 @@
     transition: all 0.5s ease;
 }
 
+#treynolds_qconfig_box{
+    padding-right: 20px;
+}
 .treynolds_qconfig_field_count {
     float: right;
     text-align: center;
