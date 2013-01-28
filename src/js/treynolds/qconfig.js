@@ -10,6 +10,10 @@ Qconfig.prototype = {
         this.timeout_delay = 400;
     },
     onkeyup:function (box) {
+        if (box.getValue() == '') {
+            this.onescape();
+            return;
+        }
         $$('.treynolds_qconfig_box').each(function (sync_box) {
             if (sync_box != box) {
                 sync_box.setValue(box.getValue());
@@ -20,6 +24,7 @@ Qconfig.prototype = {
             clearTimeout(this.timeout);
         }
         this.timeout = setTimeout(this.ontimeout.bind(this), this.timeout_delay);
+        this.updateclearbutton();
     },
     ontimeout:function () {
         this.timeout = null;
@@ -117,6 +122,7 @@ Qconfig.prototype = {
             box.setValue('');
         });
         this.clear_searching();
+        this.updateclearbutton();
     },
     handle_no_results:function(){
         $$('.treynolds_qconfig_box_wrap').each(function(noresults){
@@ -151,5 +157,12 @@ Qconfig.prototype = {
                 elm.remove();
             }
         );
+    },
+    updateclearbutton: function() {
+        if ($('treynolds_qconfig_box').getValue() == '') {
+            $('treynolds_qconfig_clear').hide();
+        } else {
+            $('treynolds_qconfig_clear').show();
+        }
     }
 };

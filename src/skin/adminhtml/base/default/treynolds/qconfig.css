@@ -8,6 +8,7 @@
     background: url(../../../default/default/images/cancel_icon.gif) center center no-repeat;
     text-decoration: none;
 }
+
 .treynolds_qconfig_loading {
     background: url(ajax-loader.gif) top left no-repeat;
     display: none;
