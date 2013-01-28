@@ -300,15 +300,46 @@ class Treynolds_Qconfig_Helper_Data extends Mage_Core_Helper_Abstract {
     }
 
     /**
+     * Translate $sections
+     *
+     * @param $sections
+     */
+    protected function translateSections(&$sections) {
+        $configFields = Mage::getSingleton('adminhtml/config');
+        foreach($sections->children() as $section) {
+            $helperName = $configFields->getAttributeModule($section);
+            $section->label = Mage::helper($helperName)->__((string)$section->label);
+
+            foreach($section->groups->children() as $group) {
+                $helperName = $configFields->getAttributeModule($section, $group);
+                $group->label = Mage::helper($helperName)->__((string)$group->label);
+
+                if ($group->fields) {
+                    foreach($group->fields->children() as $element) {
+                        $helperName = $configFields->getAttributeModule($section, $group, $element);
+                        $element->label =  Mage::helper($helperName)->__((string)$element->label);
+                        $element->hint  = (string)$element->hint ? Mage::helper($helperName)->__((string)$element->hint) : '';
+                    }
+                }
+            }
+        }
+    }
+
+    /**
      * @param $current string
      * @param $website string
      * @param $store string
      * @return Mage_Core_Model_Config_Element
      */
     protected function getSections($current, $website, $store){
+        /* TODO Have a look at Mage_Adminhtml_Block_System_Config_Form::initFields
+         there is a fieldPrefix involved which does not seem to be processed here
+         (but also might not be used at all)
+        */
         /* @var $cache Mage_Core_Model_Cache */
+        $locale = Mage::app()->getLocale()->getLocaleCode();
         $cache = Mage::getSingleton('core/cache');
-        $cache_id = 'treynolds_qcache_' . $website . '_' . $store;
+        $cache_id = 'treynolds_qcache_' . $website . '_' . $store . '_' . $locale;
         /* Check the cache */
         /* @var $sections Mage_Core_Model_Config_Element */
         $sections = null;
@@ -318,6 +349,8 @@ class Treynolds_Qconfig_Helper_Data extends Mage_Core_Helper_Abstract {
             /* @var $configFields Mage_Adminhtml_Model_Config */
             $configFields = Mage::getSingleton('adminhtml/config');
             $sections = $configFields->getSections($current);
+
+            $this->translateSections($sections);
             $cache->save($sections->asXml(), $cache_id, array(Mage_Core_Model_Config::CACHE_TAG));
         }
         else {
