@@ -166,6 +166,11 @@
     color: #fff;
     cursor: pointer !important;
 }
+.entry-edit.treynolds_searching .entry-edit-head.disabled a ,
+.entry-edit.treynolds_searching .entry-edit-head.disabled.treynolds_active a {
+    background-color: #c6cbc9;
+}
+
 .entry-edit.treynolds_searching fieldset ,
 .entry-edit.treynolds_searching input ,
 .entry-edit.treynolds_searching textarea ,
