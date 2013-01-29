@@ -8,19 +8,22 @@ $_section = $this->getRequest()->getParam('section');
         <?php echo $this->__('Quick Search'); ?>
 </label>
 <div class="treynolds_qconfig_box_wrap">
-    <input type="text" onkeyup="qconfig_onkeyup(event);" value="<?php echo $this->escapeHtml($this->getRequest()->getParam('qsearch')); ?>" id="treynolds_qconfig_box" class="treynolds_qconfig_box">
+    <input type="text" onkeyup="qconfig_onkeyup(event);" onkeydown="qconfig_onkeydown(event)" value="<?php echo $this->escapeHtml($this->getRequest()->getParam('qsearch')); ?>" id="treynolds_qconfig_box" class="treynolds_qconfig_box">
     <div class="treynolds_qconfig_no_results">
         <?php echo $this->__('No Matches'); ?>
 
     </div>
 </div>
 
-<a class="treynolds_qconfig_clear" href="#" onclick="qconfig_clear(); return false;">
+<a class="treynolds_qconfig_clear" id="treynolds_qconfig_clear" style="display:none" href="#" onclick="qconfig_clear(); return false;">
     <div class="treynolds_qconfig_loading"></div>
     &nbsp;
 </a>
 <script type="text/javascript">
     var qconfig;
+    function qconfig_onkeydown(event){
+        $('treynolds_qconfig_clear').show();
+    }
     function qconfig_onkeyup(event){
         //27 is the key code for the ESC key.
         if(event.which == 27 || event.keyCode == 27){
@@ -30,6 +33,7 @@ $_section = $this->getRequest()->getParam('section');
             var target = (event.currentTarget) ? event.currentTarget : event.srcElement ;
             qconfig.onkeyup(target);
         }
+
     }
     function qconfig_clear(){
         qconfig.onescape();
