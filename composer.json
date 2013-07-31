@@ -1,5 +1,5 @@
 {
-    "name": "timreynolds/magento-qconfig",
+    "name": "tim-reynolds/magento-qconfig",
     "license": "OSL-3.0",
     "type": "magento-module",
     "description": "Magento config quick search",
