@@ -1,0 +1,16 @@
+{
+    "name": "timreynolds/magento-qconfig",
+    "license": "OSL-3.0",
+    "type": "magento-module",
+    "description": "Magento config quick search",
+    "homepage": "https://github.com/tim-reynolds/",
+    "require": {
+        "magento-hackathon/magento-composer-installer": "*"
+    },
+    "authors":[
+        {
+            "name":"Tim Reynolds"
+        }
+    ]
+}
+
