@@ -186,7 +186,7 @@ class Treynolds_Qconfig_Helper_Data extends Mage_Core_Helper_Abstract {
      */
     protected function getModuleSpecificRecords($module, $current, $levelClause) {
 
-        $module = uc_words($module);
+        // $module = uc_words($module);
 
         /* @var $conf Mage_Core_Model_Config_System */
         $conf = Mage::getModel('core/config_system');
@@ -246,7 +246,8 @@ class Treynolds_Qconfig_Helper_Data extends Mage_Core_Helper_Abstract {
             $current = 'general';//This is currently not needed. Parameter gets set in adminhtml/system_config_tabs:122
         }
 
-        $qsearch =  trim(strtolower($qsearch));
+        $qsearchTrim =  trim($qsearch);
+        $qsearch = strtolower($qsearchTrim);
 
         if(strlen($qsearch)==0){
             return array('nav'=>array(),'group'=>array(), 'field'=>array());
@@ -255,7 +256,7 @@ class Treynolds_Qconfig_Helper_Data extends Mage_Core_Helper_Abstract {
         $qsearch = preg_replace('/("|\[|\]|\(|\))/','',$qsearch);
         $levelClause = $this->getLevelClause($website, $store);
 
-        if(!preg_match('/^module:(.+)/', $qsearch, $matches)){
+        if(!preg_match('/^module:(.+)/', $qsearchTrim, $matches)){
             /* @var $formBlock Mage_Adminhtml_Block_System_Config_Form */
             $formBlock = Mage::app()->getLayout()->createBlock('adminhtml/system_config_form');
             /* @var $sections Varien_Simplexml_Element */
