@@ -18,6 +18,7 @@
             <adminhtml>
                 <rewrite>
                     <system_config_edit>Treynolds_Qconfig_Block_Adminhtml_System_Config_Edit</system_config_edit>
+                    <system_config_form_fieldset>Treynolds_Qconfig_Block_Adminhtml_System_Config_Form_Fieldset</system_config_form_fieldset>
                 </rewrite>
             </adminhtml>
         </blocks>
