@@ -18,9 +18,18 @@ Magento Quick Config Module
 
 I created this module to make working in the System -> Configuration area of the Magento Admin easier for my clients. With qsearch you get a text box that will search the labels and values of fields for any that match your input. Areas that don't match will be shaded out, allowing you to quickly and accurately navigate the configuration area. Simple, but effective.
 
-![Screen Shot of QConfig](https://raw.github.com/tim-reynolds/magento-qconfig/master/screenshot.png)
+![Screen Shot of QConfig](/screenshot.png?raw=true)
 
 [Youtube Video showing how it works!](http://www.youtube.com/watch?v=t683rxYvEYg)
+
+New Feature! Show Overrides In System Config
+============================================
+
+If you work in a Magento instance that has many websites and store views, or even if there are just a few, you may have been annoyed at not knowing if a value is overridden at a lower level in the configuration. This module now aims to solve that for you. If a value is overridden you will now see a new display next to the scope indicator for a field. See the image below.
+
+![Screen Shot of Config Override](/screenshot2.png?raw=true)
+
+The new indicator will show an underscore for each website or store view that does not override this configuration, and an 'X' for each one that does. You can mouse over the 'X' to see the title which indicates the exact store/view that overrides the value. If it is the same website/store you are currently on then it with be highlighted with a green background and bolt font weight.
 
 Installation
 ------------
